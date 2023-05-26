@@ -9,4 +9,5 @@ puts
 
 require_relative '../init.rb'
 
+require "ostruct"
 require 'test_bench'; TestBench.activate
