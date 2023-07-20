@@ -3,6 +3,7 @@
 .bundle
 gems
 tmp
+Gemfile.lock
 
 *notes.*
 *scratch.*

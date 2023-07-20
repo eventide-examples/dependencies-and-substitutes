@@ -1,6 +1,3 @@
-# Obsolete
-__END__
-
 require_relative 'demo_init'
 
 
@@ -10,9 +7,15 @@ class HTTPClient
   end
 
   module Substitute
-    include Mimic::Recorder::Predicate
+    include RecordInvocation
 
-    predicate :posted?, method_name: :post
+    record def post(content)
+      puts "Content: #{content}"
+    end
+
+    def posted?(content)
+      invoked?(:post, content: content)
+    end
   end
 end
 
@@ -30,8 +33,5 @@ upload = Upload.new
 
 upload.("some file")
 
-upload.http_client.posted?(content: "some file")
+upload.http_client.posted?("some file")
 # => true
-
-
-
