@@ -1,0 +1,23 @@
+# Demo of Problem
+
+re: 17_predicate_recorded_specialized_mimic_dependency_with_mixin.rb
+re: 17_b_demo_of_problem__predicate_recorded_specialized_mimic_dependency_with_mixin_scratch.rb
+
+module Substitute
+  include RecordInvocation
+
+  record def post(content)
+    puts "Content: #{content}"
+  end
+
+  def posted?(content)
+    invoked?(:post, content: content)
+  end
+end
+
+- The include of `RecordInvocation` and the `record def post` can be removed from the substitute without causing malfunction
+- Any specialized implementation in the `record def post` is (of course) not executed since the method isn't implemented in the substitute
+- Implicit inclusion of `RecordInvocation` happens in the Mimic library
+- Mimics now record by default implicitly. Previously, recording had to be explicitly activated. It was decided that Mimics are simply recording objects
+  - Note: This may not have been ideal
+  - Could be that Mimics should only record when used with the Dependency library and diagnostic substitutes
